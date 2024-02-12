@@ -23,15 +23,33 @@ class MyComponent extends React.Component {
   // <DisplayInfo data={this.state.listUser} func={this.handleAddNewUser} />
   // bên trái: tên của props mình muốn truyền
   // bên phải: giá trị muốn gán cho props
+  // khi state hoặc props thay đôi thì component sẽ bị render lại
+
+  handleDeleteUser = (userID) => {
+    let listUserClone = [...this.state.listUser];
+    listUserClone = listUserClone.filter((item) => item.id !== userID);
+    this.setState({
+      listUser: listUserClone,
+    });
+  };
 
   render() {
+    // const test = { name: "Nhung", age: 21 };
     return (
-      <div>
-        <AddUserInfo func={this.handleAddNewUser} />
+      <>
         <br></br>
-        <br></br>
-        <DisplayInfo data={this.state.listUser} />
-      </div>
+        {/* {console.log(test)} */}
+        {/* {JSON.stringify(test)} */}
+        <div className="a">
+          <AddUserInfo func={this.handleAddNewUser} />
+          <br></br>
+          <DisplayInfo
+            data={this.state.listUser}
+            handleDeleteUser={this.handleDeleteUser}
+          />
+        </div>
+        <div className="b"></div>
+      </>
     );
   }
 }

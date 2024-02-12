@@ -1,7 +1,13 @@
 import React from "react";
-
+import "./DisplayInfo.scss";
+import logo from "./../logo.svg";
 class DisplayInfo extends React.Component {
-  state = { isShowListUser: true };
+  constructor(props) {
+    // -> Đây là nơi khai báo state cho react component nó sẽ nhận đầy đủ props, state từ component cha truyền xuống
+    super(props);
+    //babel compiler
+    this.state = { isShowListUser: true };
+  }
   handelShowHide() {
     this.setState({
       isShowListUser: !this.state.isShowListUser,
@@ -15,7 +21,8 @@ class DisplayInfo extends React.Component {
     // const listUser = this.props.listUser
     return (
       //props -> properties
-      <div>
+      <div className="display-info-container">
+        {/* <img src={logo}></img> */}
         <div>
           <span
             onClick={() => {
@@ -28,20 +35,31 @@ class DisplayInfo extends React.Component {
           </span>
         </div>
         {this.state.isShowListUser && (
-          <div>
-            {data.map((item) => {
+          <>
+            {data.map((user) => {
+              console.log(user);
               return (
                 <div
-                  key={item.id}
-                  className={item.age * 1 > 18 ? "green" : "red"}
+                  key={user.id}
+                  className={user.age * 1 > 18 ? "green" : "red"}
                 >
-                  <div>My name is {item.name}</div>
-                  <div>My age {item.age}</div>
+                  <div>My name is {user.name}</div>
+                  <div>My age {user.age}</div>
+
+                  <div>
+                    <button
+                      onClick={() => {
+                        this.props.handleDeleteUser(user.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
                   <hr />
                 </div>
               );
             })}
-          </div>
+          </>
         )}
       </div>
     );
