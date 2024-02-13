@@ -2,22 +2,20 @@
 
 // function component
 
-import React from "react";
+import React, { useState } from "react";
 import AddUserInfo from "../components/AddUserInfo";
 import DisplayInfo from "../components/DisplayInfo";
 
-class MyComponent extends React.Component {
-  state = {
-    listUser: [
-      { id: 1, name: "Tây Nguyên", age: "18" },
-      { id: 2, name: "Tây Nguyên 2", age: "23" },
-      { id: 3, name: "Tây Nguyên 3", age: "24" },
-      { id: 4, name: "Tây Nguyên 4", age: "25" },
-    ],
-  };
+const MyComponent = (props) => {
+  const [listUsers, setListUsers] = useState([
+    { id: 1, name: "Tây Nguyên", age: "18" },
+    { id: 2, name: "Tây Nguyên 2", age: "23" },
+    { id: 3, name: "Tây Nguyên 3", age: "24" },
+    { id: 4, name: "Tây Nguyên 4", age: "25" },
+  ]);
 
-  handleAddNewUser = (userObj) => {
-    this.setState({ listUser: [userObj, ...this.state.listUser] });
+  const handleAddNewUser = (userObj) => {
+    setListUsers([userObj, ...listUsers]);
   };
 
   // <DisplayInfo data={this.state.listUser} func={this.handleAddNewUser} />
@@ -25,33 +23,21 @@ class MyComponent extends React.Component {
   // bên phải: giá trị muốn gán cho props
   // khi state hoặc props thay đôi thì component sẽ bị render lại
 
-  handleDeleteUser = (userID) => {
-    let listUserClone = [...this.state.listUser];
-    listUserClone = listUserClone.filter((item) => item.id !== userID);
-    this.setState({
-      listUser: listUserClone,
-    });
+  const handleDeleteUser = (userID) => {
+    let listUsersClone = listUsers;
+    listUsersClone = listUsersClone.filter((item) => item.id !== userID);
+    setListUsers(listUsersClone);
   };
-
-  render() {
-    // const test = { name: "Nhung", age: 21 };
-    return (
-      <>
+  return (
+    <>
+      <div className="a">
+        <AddUserInfo func={handleAddNewUser} />
         <br></br>
-        {/* {console.log(test)} */}
-        {/* {JSON.stringify(test)} */}
-        <div className="a">
-          <AddUserInfo func={this.handleAddNewUser} />
-          <br></br>
-          <DisplayInfo
-            data={this.state.listUser}
-            handleDeleteUser={this.handleDeleteUser}
-          />
-        </div>
-        <div className="b"></div>
-      </>
-    );
-  }
-}
+        <DisplayInfo data={listUsers} handleDeleteUser={handleDeleteUser} />
+      </div>
+      <div className="b"></div>
+    </>
+  );
+};
 
 export default MyComponent;
