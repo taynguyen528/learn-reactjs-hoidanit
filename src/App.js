@@ -1,38 +1,34 @@
-import logo from "./logo.svg";
-import "./App.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { increaseCounter, decreaseCounter } from "./redux/action/counterAction";
-import MyComponent from "./components/MyComponent";
-
 import React from "react";
+import "./App.scss";
+import Header from "./components/Header/Header";
+import { Outlet } from "react-router-dom";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="app-container">
-        Hello Tay Nguyen
-        <MyComponent></MyComponent>
+const App = () => {
+  return (
+    <div className="app-container">
+      <div className="header-container">
+        <Header />
       </div>
-    );
-  }
-}
+      <div className="main-container">
+        <div className="sidenav-container"></div>
+        <div className="app-content">
+          <Outlet></Outlet>
+        </div>
+      </div>
 
-// const App = () => {
-//   const count = useSelector((state) => state.counter.count);
-//   const dispatch = useDispatch();
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <div>Hello word Tay Nguyen</div>
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p></p>
-//         <div>Count = {count}</div>
-//         <button onClick={() => dispatch(increaseCounter())}>Increase</button>
-//         <button onClick={() => dispatch(decreaseCounter())}>Decrease</button>
-//       </header>
-//     </div>
-//   );
-// };
+      {/* <div>
+        Test link
+        <div>
+          <button>
+            <Link to={`users`}>go to user page</Link>
+          </button>
+          <button>
+            <Link to={`admins`}>go to admin page</Link>
+          </button>
+        </div>
+      </div> */}
+    </div>
+  );
+};
 
 export default App;
