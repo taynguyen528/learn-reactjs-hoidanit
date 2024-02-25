@@ -69,7 +69,7 @@ const ManageUser = (props) => {
 
     return (
         <div className="manage-user-container">
-            <div className="title">Manage User</div>
+            <div className="title">Manage User 123</div>
             <div className="users-content">
                 <div>
                     <button
