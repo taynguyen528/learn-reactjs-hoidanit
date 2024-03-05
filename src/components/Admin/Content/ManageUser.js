@@ -42,7 +42,6 @@ const ManageUser = (props) => {
         let res = await getUserWithPaginate(page, LIMIT_USER);
 
         if (res.EC === 0) {
-            console.log(res.DT);
             setListUser(res.DT.users);
             setPageCount(res.DT.totalPages);
         }
@@ -69,7 +68,7 @@ const ManageUser = (props) => {
 
     return (
         <div className="manage-user-container">
-            <div className="title">Manage User 123</div>
+            <div className="title">Manage User </div>
             <div className="users-content">
                 <div>
                     <button

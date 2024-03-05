@@ -7,7 +7,7 @@ const TableUserPaginate = (props) => {
     // const [pageCount, setPageCount] = useState(0);
 
     const handlePageClick = (event) => {
-        console.log(`User requested page number ${event.selected}`);
+        // console.log(`User requested page number ${event.selected}`);
         props.fetchListUserWithPaginate(+event.selected + 1);
         props.setCurrentPage(+event.selected + 1);
     };

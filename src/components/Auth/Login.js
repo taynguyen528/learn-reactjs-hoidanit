@@ -3,10 +3,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../Services/apiServices";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/action/userAction";
+import { FaSpinner } from "react-icons/fa";
+
 const Login = (props) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+
     const handleGoToHomePage = () => {
         navigate("/");
     };
@@ -27,16 +34,19 @@ const Login = (props) => {
             toast.error("invalid email");
             return;
         }
-
+        setIsLoading(true);
         //submit api
         let data = await postLogin(email, password);
-        console.log(data);
+
         if (data && data.EC === 0) {
+            dispatch(doLogin(data));
             toast.success(data.EM);
+            setIsLoading(false);
             navigate("/");
         }
         if (data && +data.EC !== 0) {
             toast.error(data.EM);
+            setIsLoading(false);
         }
     };
 
@@ -74,8 +84,12 @@ const Login = (props) => {
                     <button
                         className="btn-submit"
                         onClick={() => handleLogin()}
+                        disabled={isLoading}
                     >
-                        Login
+                        {isLoading === true && (
+                            <FaSpinner className="loader-icon" />
+                        )}
+                        <span>Login</span>
                     </button>
                 </div>
                 <div className="back">

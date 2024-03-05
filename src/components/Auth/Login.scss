@@ -44,8 +44,17 @@
             color: white;
             background: black;
             transition: 0.5s all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             &:hover {
                 opacity: 0.8;
+            }
+            &:disabled {
+                background: #ddd;
+                cursor: no-drop;
+                color: #afafaf;
             }
         }
     }
@@ -55,5 +64,19 @@
     .back {
         text-align: center;
         cursor: pointer;
+    }
+    .loader-icon {
+        margin-right: 7px;
+        top: 2px;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+        to {
+            transform: scale(1) rotate(360deg);
+        }
     }
 }
