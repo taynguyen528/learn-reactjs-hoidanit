@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate";
-import { set } from "lodash";
 
 const TableUserPaginate = (props) => {
     const { listUser, pageCount } = props;

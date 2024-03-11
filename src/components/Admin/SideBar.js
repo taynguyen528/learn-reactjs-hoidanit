@@ -14,10 +14,11 @@ import { FaGem, FaGithub } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
 import { FaReact } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
+    const navigate = useNavigate();
     return (
         <>
             <ProSidebar
@@ -41,7 +42,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <FaReact size={"3em"} color={"#00bfff"} />
-                        <span>Tây Nguyên</span>
+                        <span onClick={() => navigate("/")}>Tây Nguyên</span>
                     </div>
                 </SidebarHeader>
 
@@ -68,8 +69,15 @@ const SideBar = (props) => {
                                 Quản lý User
                                 <Link to={"/admins/manage-users"} />
                             </MenuItem>
-                            <MenuItem>Quản lý Bài Quiz</MenuItem>
-                            <MenuItem> Quản lý Câu Hỏi</MenuItem>
+                            <MenuItem>
+                                Quản lý Bài Quiz
+                                <Link to={"/admins/manage-quizzes"} />
+                            </MenuItem>
+                            <MenuItem>
+                                {" "}
+                                Quản lý Câu Hỏi
+                                <Link to={"/admins/manage-questions"} />
+                            </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

@@ -69,6 +69,57 @@ const postSubmitQuiz = (data) => {
     return instance.post(`api/v1/quiz-submit`, { ...data });
 };
 
+const postCreateNewQuiz = (description, name, difficulty, quizImage) => {
+    const data = new FormData();
+    data.append("description", description);
+    data.append("name", name);
+    data.append("difficulty", difficulty);
+    data.append("quizImage", quizImage);
+    return instance.post("api/v1/quiz", data);
+};
+
+const getAllQuizForAdmin = () => {
+    return instance.get("api/v1/quiz/all");
+};
+
+const deleteQuizForAdmin = (quizID) => {
+    return instance.delete(`api/v1/quiz/${quizID}`);
+};
+
+const putUpdateQuizForAdmin = (id, name, description, difficulty, image) => {
+    //submit data
+    const data = new FormData();
+    data.append("id", id);
+    data.append("name", name);
+    data.append("description", description);
+    data.append("difficulty", difficulty);
+    data.append("quizImage", image);
+
+    return instance.put("api/v1/quiz", data);
+};
+
+// form-data : post man
+const postCreateNewQuestionForQuiz = (quiz_id, description, questionImage) => {
+    const data = new FormData();
+    data.append("quiz_id", quiz_id);
+    data.append("description", description);
+    data.append("questionImage", questionImage);
+
+    return instance.post("api/v1/question", data);
+};
+// x-www-form-urlencoded
+const postCreateNewAnswerForQuiz = (
+    description,
+    correct_answer,
+    question_id
+) => {
+    return instance.post("api/v1/answer", {
+        description,
+        correct_answer,
+        question_id,
+    });
+};
+
 export {
     postCreateNewUser,
     getAllUser,
@@ -80,4 +131,10 @@ export {
     getQuizByUser,
     getDataQuiz,
     postSubmitQuiz,
+    postCreateNewQuiz,
+    getAllQuizForAdmin,
+    deleteQuizForAdmin,
+    putUpdateQuizForAdmin,
+    postCreateNewQuestionForQuiz,
+    postCreateNewAnswerForQuiz,
 };
