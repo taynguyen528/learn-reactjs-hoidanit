@@ -1,7 +1,6 @@
 import ModalCreateUser from "./ModalCreateUser";
 import { FcPlus } from "react-icons/fc";
 import "./ManageUser.scss";
-import TableUser from "./TableUser";
 import { useEffect, useState } from "react";
 import { getAllUser, getUserWithPaginate } from "../../Services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
@@ -17,7 +16,7 @@ const ManageUser = (props) => {
     const [selectUser, setSelectUser] = useState("");
     const [listUser, setListUser] = useState([]);
     const [dataUpdate, setDataUpdate] = useState({});
-    const [dataDelete, setDataDelete] = useState("");
+    const [dataDelete, setDataDelete] = useState({});
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -42,7 +41,6 @@ const ManageUser = (props) => {
         let res = await getUserWithPaginate(page, LIMIT_USER);
 
         if (res.EC === 0) {
-            console.log(res.DT);
             setListUser(res.DT.users);
             setPageCount(res.DT.totalPages);
         }
@@ -69,7 +67,7 @@ const ManageUser = (props) => {
 
     return (
         <div className="manage-user-container">
-            <div className="title">Manage User 123</div>
+            <div className="title">Manage User </div>
             <div className="users-content">
                 <div>
                     <button

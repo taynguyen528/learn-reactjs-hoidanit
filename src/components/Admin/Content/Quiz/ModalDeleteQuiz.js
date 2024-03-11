@@ -1,23 +1,19 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import { deleteQuizForAdmin } from "../../../Services/apiServices.js";
 
-import { deleteUser } from "../../Services/apiServices";
-
-const ModalDeleteUser = (props) => {
+const ModalDeleteQuiz = (props) => {
     const { show, setShow, dataDelete } = props;
 
     const handleClose = () => setShow(false);
-    
-    const handelSubmitDeleteUser = async () => {
-        //call api
-        let data = await deleteUser(dataDelete.id);
+
+    const handelSubmitDeleteQuiz = async () => {
+        // call api
+        let data = await deleteQuizForAdmin(dataDelete.id);
         if (data && data.EC === 0) {
             toast.success(data.EM);
-            handleClose();
-            // await props.fetchListUser();
-            props.setCurrentPage(1);
-            await props.fetchListUserWithPaginate(1);
+            await props.fetchListQuiz();
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM);
@@ -29,20 +25,20 @@ const ModalDeleteUser = (props) => {
         <>
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Delete the User?</Modal.Title>
+                    <Modal.Title>Confirm Delete Quiz?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are you sure to delete this user. email :{" "}
+                    Are you sure to delete this quiz. id :{" "}
                     <b>
                         {/* Luôn kiểm tra trước xem có data không để hạn chế bị lỗi */}
-                        {dataDelete && dataDelete.email ? dataDelete.email : ""}
+                        {dataDelete && dataDelete.id ? dataDelete.id : ""}
                     </b>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handelSubmitDeleteUser}>
+                    <Button variant="primary" onClick={handelSubmitDeleteQuiz}>
                         Confirm
                     </Button>
                 </Modal.Footer>
@@ -51,4 +47,4 @@ const ModalDeleteUser = (props) => {
     );
 };
 
-export default ModalDeleteUser;
+export default ModalDeleteQuiz;
