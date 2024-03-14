@@ -120,6 +120,21 @@ const postCreateNewAnswerForQuiz = (
     });
 };
 
+const postAssignQuiz = (quizId, userId) => {
+    return instance.post("api/v1/quiz-assign-to-user", {
+        quizId,
+        userId,
+    });
+};
+
+const getQuizWithQA = (quizId) => {
+    return instance.get(`api/v1/quiz-with-qa/${quizId}`);
+};
+
+const postUpsertQA = (data) => {
+    return instance.post(`api/v1/quiz-upsert-qa`, { ...data });
+};
+
 export {
     postCreateNewUser,
     getAllUser,
@@ -137,4 +152,7 @@ export {
     putUpdateQuizForAdmin,
     postCreateNewQuestionForQuiz,
     postCreateNewAnswerForQuiz,
+    postAssignQuiz,
+    getQuizWithQA,
+    postUpsertQA,
 };
