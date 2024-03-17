@@ -5,7 +5,7 @@ const HomePage = (props) => {
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
     const navigate = useNavigate();
 
-    // console.log(isAuthenticated);
+    
     return (
         <div className="homepage-container">
             <video autoPlay muted loop>

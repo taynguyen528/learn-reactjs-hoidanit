@@ -107,6 +107,7 @@ const postCreateNewQuestionForQuiz = (quiz_id, description, questionImage) => {
 
     return instance.post("api/v1/question", data);
 };
+
 // x-www-form-urlencoded
 const postCreateNewAnswerForQuiz = (
     description,
@@ -135,6 +136,14 @@ const postUpsertQA = (data) => {
     return instance.post(`api/v1/quiz-upsert-qa`, { ...data });
 };
 
+const logOut = (email, refresh_token) => {
+    return instance.post(`api/v1/logout`, { email, refresh_token });
+};
+
+const getOverview = () => {
+    return instance.get(`api/v1/overview`);
+};
+
 export {
     postCreateNewUser,
     getAllUser,
@@ -155,4 +164,6 @@ export {
     postAssignQuiz,
     getQuizWithQA,
     postUpsertQA,
+    logOut,
+    getOverview,
 };

@@ -1,0 +1,39 @@
+.dashboard-content {
+    padding: 15px 10px;
+    .title {
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .content {
+        display: flex;
+        gap: 20px;
+        .content-left {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            .child {
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: calc(50% - 10px);
+                height: 150px;
+                gap: 5px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                flex-direction: column;
+
+                .text-2 {
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .content-right {
+            width: 50%;
+            height: 350px;
+        }
+    }
+}

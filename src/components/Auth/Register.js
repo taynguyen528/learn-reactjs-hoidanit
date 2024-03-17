@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { postRegister } from "../Services/apiServices";
-
 const Register = (props) => {
     const navigate = useNavigate();
 

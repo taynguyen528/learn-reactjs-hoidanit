@@ -205,10 +205,6 @@ const QuizQA = (props) => {
 
         let questionsClone = _.cloneDeep(questions);
         for (let i = 0; i < questionsClone.length; i++) {
-            console.log(
-                "check questionClone: ",
-                questionsClone[i].answers[i].id
-            );
             if (questionsClone[i].imageFile) {
                 questionsClone[i].imageFile = await toBase64(
                     questionsClone[i].imageFile
@@ -216,15 +212,21 @@ const QuizQA = (props) => {
             }
         }
 
+        console.log("check questionClone: ", questionsClone);
+
         let res = await postUpsertQA({
             quizId: +selectedQuiz.value,
             questions: questionsClone,
         });
 
         console.log("check res: ", res);
-        // toast.success("Create question and answers success!");
-        // setQuestions(initQuestion);
-        //submit answers
+
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+            fetchListQuizWithQA();
+        } else {
+            toast.error(res.EM);
+        }
     };
 
     const toBase64 = (file) =>
@@ -274,7 +276,6 @@ const QuizQA = (props) => {
                 newQA.push(q);
             }
             setQuestions(newQA);
-            console.log("check res: ", res);
         }
     };
 
@@ -290,6 +291,8 @@ const QuizQA = (props) => {
             setListQuiz(newQuiz);
         }
     };
+
+    console.log("check questions: ", questions);
 
     return (
         <div className="questions-container">
